@@ -1,0 +1,27 @@
+https://www.youtube.com/watch?v=24vVFtwuBWs&ab_channel=selfedu - відос по авторизації користувача
+
+Доробити роути з переходу реєстрації на головну сторінку
+Зробити роут зі входу юзера в акаунт з переходом на сторінку до постів.
+
+запитання!
+
+1- як зробити так щоб після входу до кабінету, юзеру відображалась
+головна сторінка
+
+встановлення docker
+	sudo apt install docker
+	
+встановлення docker-compose
+	sudo apt install docker-compose
+
+запустити докер
+	sudo docker-compose up --build
+
+зайти в контейнер (app) - назва контойнеру
+	sudo docker-compose exec app bash
+подивитись які порти зайняті
+	sudo netstat -tulpn
+
+зміна прав доступу на дерикторію до БД в докері (щоб видалити або змінити)
+	sudo chmod -R 0777 *
+

@@ -1,0 +1,48 @@
+version: "3"
+
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: ./web/python/DockerFile
+    container_name: 'app-web2'
+    volumes:
+      - .:/application
+    expose:
+      - "8080"
+    env_file:
+      - .env
+    depends_on:
+      - mysql
+    networks:
+      - app
+
+  mysql:
+    container_name: 'app_db'
+    image: postgres:13-alpine
+    volumes:
+      - ./web/data:/var/lib/mysql
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=19982804
+      - POSTGRES_DB=posttitle
+    ports:
+      - "3307:3306"
+    networks:
+      - app
+    security_opt:
+      - seccomp:unconfined
+
+  nginx:
+    build: ./services/nginx
+    ports:
+      - 1337:80
+    depends_on:
+      - app
+
+volumes:
+  postgres_data:
+
+networks:
+  app:
+    driver: bridge
