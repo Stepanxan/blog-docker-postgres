@@ -6,7 +6,7 @@ from flask_migrate import Migrate
 
 
 app = Flask(__name__)
-app.config.from_object("config.Config")
+app.config["SQLALCHEMY_DATABASE_URI"]='postgresql://stepan:19982804@postgres_db:5432/posttitle'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = "59ceec65a970fa3b1a00830e53081eb6f565c272"
 db = SQLAlchemy(app)
@@ -34,4 +34,4 @@ with app.app_context():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8081, debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)

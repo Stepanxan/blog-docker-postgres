@@ -15,3 +15,4 @@ SQLAlchemy==1.4.44
 Werkzeug==2.2.2
 cryptography
 psycopg2-binary==2.9.4
+gunicorn

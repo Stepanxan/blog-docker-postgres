@@ -5,43 +5,26 @@ services:
     build:
       context: ./
       dockerfile: ./web/python/DockerFile
-    container_name: 'app-web2'
+    container_name: 'app-web3'
     volumes:
       - .:/application
     expose:
-      - "8080"
-    env_file:
-      - .env
+      - 5432
     depends_on:
-      - mysql
+      - postgres_db
     networks:
       - app
 
-  mysql:
-    container_name: 'app_db'
+  postgres_db:
     image: postgres:13-alpine
-    volumes:
-      - ./web/data:/var/lib/mysql
     environment:
-      - POSTGRES_USER=user
+      - POSTGRES_USER=stepan
       - POSTGRES_PASSWORD=19982804
       - POSTGRES_DB=posttitle
-    ports:
-      - "3307:3306"
+    volumes:
+      - ./web/postgres:/var/lib/postgresql/data
     networks:
       - app
-    security_opt:
-      - seccomp:unconfined
-
-  nginx:
-    build: ./services/nginx
-    ports:
-      - 1337:80
-    depends_on:
-      - app
-
-volumes:
-  postgres_data:
 
 networks:
   app:
