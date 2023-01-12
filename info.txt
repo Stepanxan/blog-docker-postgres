@@ -19,9 +19,14 @@ https://www.youtube.com/watch?v=24vVFtwuBWs&ab_channel=selfedu - відос по
 
 зайти в контейнер (app) - назва контойнеру
 	sudo docker-compose exec app bash
+	або
+	sudo docker exec -it app-web bash
 подивитись які порти зайняті
 	sudo netstat -tulpn
 
 зміна прав доступу на дерикторію до БД в докері (щоб видалити або змінити)
 	sudo chmod -R 0777 *
+видалити всі контейнери і почистити докер
+	sudo docker system prune -a
+
 

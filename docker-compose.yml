@@ -5,18 +5,19 @@ services:
     build:
       context: ./
       dockerfile: ./web/python/DockerFile
-    container_name: 'app-web3'
+    container_name: 'app-web'
     volumes:
       - .:/application
     expose:
-      - 5432
+      - 8000
     depends_on:
       - postgres_db
     networks:
-      - app
+      - web
 
   postgres_db:
     image: postgres:13-alpine
+    container_name: 'app-db'
     environment:
       - POSTGRES_USER=stepan
       - POSTGRES_PASSWORD=19982804
@@ -24,8 +25,22 @@ services:
     volumes:
       - ./web/postgres:/var/lib/postgresql/data
     networks:
+      - web
+
+  nginx:
+    container_name: 'app-nginx'
+    image: nginx:alpine
+    build: ./web/nginx
+    ports:
+      - 8000:80
+    depends_on:
       - app
+    volumes:
+      - .:/application
+    networks:
+      - web
+
 
 networks:
-  app:
+  web:
     driver: bridge
